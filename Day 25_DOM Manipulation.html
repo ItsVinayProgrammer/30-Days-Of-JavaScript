@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Manipulation Example</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">DOM Manipulation Example</h1>
+  <button class="btn">Click me!</button>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+  <button class="remove-btn">Remove Last Item</button>
+  <a href="https://www.example.com" target="_blank">OpenAI Website</a>
+  <form>
+    <label for="email">Enter your email</label>
+    <input type="email" id="email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <div class="box">Hover me!</div>
+  <input type="text" id="newItemInput" placeholder="Enter a new item">
+  <button id="addItemButton">Add Item</button>
+
+  <script>
+    // Selecting DOM elements
+    const titleElement = document.getElementById('title');
+    const buttonElement = document.querySelector('.btn');
+    const listItems = document.querySelectorAll('li');
+    const addItemButton = document.getElementById('addItemButton');
+    const newItemInput = document.getElementById('newItemInput');
+
+    // Modifying DOM elements
+    titleElement.textContent = 'DOM Manipulation Example';
+    buttonElement.style.backgroundColor = 'blue';
+
+    // Adding event listener
+    buttonElement.addEventListener('click', () => {
+      // Manipulating DOM on button click
+      listItems.forEach((item) => {
+        item.style.color = 'red';
+      });
+    });
+
+    // Creating new DOM elements
+    addItemButton.addEventListener('click', () => {
+      const newItemText = newItemInput.value;
+      if (newItemText) {
+        const newListItem = document.createElement('li');
+        newListItem.textContent = newItemText;
+        document.querySelector('ul').appendChild(newListItem);
+        newItemInput.value = '';
+      }
+    });
+
+    // Removing DOM elements
+    const removeButton = document.querySelector('.remove-btn');
+    removeButton.addEventListener('click', () => {
+      const lastItem = document.querySelector('li:last-child');
+      if (lastItem) {
+        lastItem.remove();
+      }
+    });
+
+    // Modifying attributes
+    const linkElement = document.querySelector('a');
+    linkElement.setAttribute('href', 'https://www.openai.com');
+    linkElement.setAttribute('target', '_blank');
+
+    // Handling form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = document.querySelector('#email');
+      const email = input.value;
+      if (email) {
+        alert(`Thanks for subscribing with email: ${email}`);
+        input.value = '';
+      }
+    });
+
+    // Traversing the DOM
+    const firstListItem = document.querySelector('li:first-child');
+    const parentElement = firstListItem.parentElement;
+    const nextSibling = firstListItem.nextElementSibling;
+    const previousSibling = firstListItem.previousElementSibling;
+
+    // Animation and Effects
+    const boxElement = document.querySelector('.box');
+    boxElement.addEventListener('mouseenter', () => {
+      boxElement.classList.add('highlight');
+    });
+    boxElement.addEventListener('mouseleave', () => {
+      boxElement.classList.remove('highlight');
+    });
+  </script>
+</body>
+</html>
