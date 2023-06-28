@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling Example</title>
+</head>
+<body>
+  <h1>Event Handling Example</h1>
+  <button id="clickButton">Click me!</button>
+  <input type="text" id="textInput">
+  <div id="output"></div>
+
+  <script>
+    // Get the button element
+    const button = document.getElementById('clickButton');
+
+    // Add event listener for button click event
+    button.addEventListener('click', handleClick);
+
+    // Function to handle button click event
+    function handleClick() {
+      // Update the output div with a message
+      const output = document.getElementById('output');
+      output.textContent = 'Button clicked!';
+    }
+
+    // Get the text input element
+    const input = document.getElementById('textInput');
+
+    // Add event listener for input change event
+    input.addEventListener('input', handleInput);
+
+    // Function to handle input change event
+    function handleInput(event) {
+      // Get the input value
+      const inputValue = event.target.value;
+
+      // Update the output div with the input value
+      const output = document.getElementById('output');
+      output.textContent = `Input value: ${inputValue}`;
+    }
+  </script>
+</body>
+</html>

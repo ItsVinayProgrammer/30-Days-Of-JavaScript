@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Example</title>
+</head>
+<body>
+  <h1>AJAX Example</h1>
+  <button id="loadButton">Load Weather</button>
+  <div id="output"></div>
+
+  <script>
+    // Get the button element
+    const button = document.getElementById('loadButton');
+
+    // Add event listener for button click event
+    button.addEventListener('click', loadWeather);
+
+    // Function to handle button click event
+    function loadWeather() {
+      // Create a new XMLHttpRequest object
+      const xhr = new XMLHttpRequest();
+
+      // Configure the request
+      xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=Chennai,India&appid=YOUR_API_KEY', true);
+
+      // Set up a callback function to handle the response
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          // Parse the JSON response
+          const data = JSON.parse(xhr.responseText);
+
+          // Extract the relevant weather information
+          const temperature = data.main.temp;
+          const description = data.weather[0].description;
+
+          // Update the output div with the weather information
+          const output = document.getElementById('output');
+          output.innerHTML = `Current Weather: ${temperature} &#8451;, ${description}`;
+        } else {
+          // Handle errors
+          console.error('Request failed. Status:', xhr.status);
+        }
+      };
+
+      // Send the request
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
